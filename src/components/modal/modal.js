@@ -14,7 +14,7 @@ const Container = styled.div`
 
 let Modal = ({children, setShow}) => {
     return (
-        <Container onClick={() => {setShow(false); console.log("Parent")}}>
+        <Container onClick={() => setShow(false)}>
             {children}
         </Container>
     )

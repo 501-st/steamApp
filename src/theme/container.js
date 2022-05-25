@@ -2,6 +2,8 @@ import React from 'react';
 import styled from "styled-components";
 
 const ContainerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   margin: -20px auto 40px;
   padding: 0 40px 0;
   width: 1185px;

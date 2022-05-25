@@ -15,9 +15,9 @@ const OwnInput = styled.input`
   }
 `;
 
-const Input = ({placeholder, margin, width}) => {
+const Input = ({placeholder, margin, width, onChange}) => {
     return(
-        <OwnInput width={width} placeholder={placeholder} margin={margin}/>
+        <OwnInput onChange={e => onChange(e)} width={width} placeholder={placeholder} margin={margin}/>
     )
 }
 

@@ -25,12 +25,12 @@ const Account = () => {
                     </Text>
                 </div>
                 <ModRowContainer>
-                    <Button padding={"9px 72px"} background={"#320F0F"} border={"black"}>
+                    <Button padding={"9px 72px"} background={"rgba(50, 15, 15, 0.4)"} border={"black"}>
                         <Text fontSize={"20px"}>
                             Logout
                         </Text>
                     </Button>
-                    <Button padding={"9px 20px"} background={"#320F0F"} border={"black"}>
+                    <Button padding={"9px 20px"} background={"rgba(50, 15, 15, 0.4)"} border={"black"}>
                         <Text fontSize={"20px"}>
                             Change password
                         </Text>
