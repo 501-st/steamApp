@@ -26,6 +26,7 @@ const Containers = ({data}) => {
     const dispatch = useDispatch();
 
     const MAXIMUM = 5
+    const MAXIMUM_ITEMS = 5
 
     return (
         <Layout>
@@ -56,7 +57,7 @@ const Containers = ({data}) => {
                             </div>
                             <div style={{padding: "6px 7px", backgroundColor: "white", borderRadius: "5px", marginBottom: "20px"}}>
                                 <Text fontSize={"16px"} color={"black"}>
-                                    Items: {item.used}/{item.place}
+                                    Items: {item.data.length}/{MAXIMUM_ITEMS}
                                 </Text>
                             </div>
                             <div style={{

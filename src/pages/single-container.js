@@ -18,8 +18,6 @@ const ModRowContainer = styled(RowContainer)`
   border-radius: 10px;
 `;
 
-const Box = styled.div``;
-
 const SingleContainer = () => {
     const [show, setShow] = useState(false)
 

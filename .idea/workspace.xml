@@ -2,54 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1578a699-a674-44b8-b4f0-83bc1c4f186b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/page-components/containers/images/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-components/containers/modals/upgrade-modal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/containerReducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/notificationsReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/.eslintcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/0.pack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/0.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/1.pack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/1.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/10.pack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/10.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/11.pack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/11.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/12.pack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/12.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/13.pack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/13.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/14.pack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/14.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/15.pack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/15.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/16.pack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/16.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/17.pack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/17.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/18.pack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/18.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/2.pack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/2.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/3.pack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/3.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/4.pack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/4.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/5.pack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/5.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/6.pack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/6.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/7.pack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/7.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/8.pack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/8.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/9.pack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/9.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/index.pack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/index.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/default-development/index.pack.old" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/default-development/index.pack.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/footer/footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/footer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/modal/modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modal/modal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page-components/bag/images/gun.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page-components/single-container/images/gun.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page-components/bag/modals/add-skin-modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page-components/single-container/modals/add-skin-modal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page-components/bags/images/plus.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page-components/containers/images/plus.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page-components/bags/images/trash.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page-components/containers/images/trash.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page-components/bags/modals/add-bag-modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page-components/containers/modals/add-bag-modal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page-components/bags/plus-button.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page-components/containers/plus-button.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/account.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/bag.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/single-container.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/bags.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/containers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/notifications.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/notifications.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/theme/button.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/button.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/theme/container.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/container.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/theme/input.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/input.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/theme/link.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/link.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/single-container.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/single-container.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +46,7 @@
       <option name="presentableId" value="Default" />
       <updated>1653309709507</updated>
       <workItem from="1653309711301" duration="9000" />
-      <workItem from="1653309740850" duration="24160000" />
+      <workItem from="1653309740850" duration="24867000" />
     </task>
     <servers />
   </component>
