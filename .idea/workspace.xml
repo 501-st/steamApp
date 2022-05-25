@@ -41,6 +41,7 @@
       <change beforePath="$PROJECT_DIR$/src/components/page-components/bags/modals/add-bag-modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page-components/containers/modals/add-bag-modal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page-components/bags/plus-button.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page-components/containers/plus-button.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/account.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/bag.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/single-container.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/bags.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/containers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/notifications.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/notifications.js" afterDir="false" />
@@ -91,7 +92,7 @@
       <option name="presentableId" value="Default" />
       <updated>1653309709507</updated>
       <workItem from="1653309711301" duration="9000" />
-      <workItem from="1653309740850" duration="23809000" />
+      <workItem from="1653309740850" duration="24160000" />
     </task>
     <servers />
   </component>
