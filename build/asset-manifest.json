@@ -1,16 +1,18 @@
 {
   "files": {
     "main.css": "/static/css/main.b6d55bd8.css",
-    "main.js": "/static/js/main.8b06484b.js",
+    "main.js": "/static/js/main.26daa903.js",
     "static/media/background.png": "/static/media/background.054ad85db833949ab2a7.png",
+    "static/media/containers.png": "/static/media/containers.91fb01175533944280c7.png",
+    "static/media/guns.png": "/static/media/guns.6d82be925a53fe8aead5.png",
     "static/media/profile.png": "/static/media/profile.6d4a8991b85290477971.png",
     "static/media/logo.png": "/static/media/logo.b87a78f8adcdbee1b4b8.png",
     "index.html": "/index.html",
     "main.b6d55bd8.css.map": "/static/css/main.b6d55bd8.css.map",
-    "main.8b06484b.js.map": "/static/js/main.8b06484b.js.map"
+    "main.26daa903.js.map": "/static/js/main.26daa903.js.map"
   },
   "entrypoints": [
     "static/css/main.b6d55bd8.css",
-    "static/js/main.8b06484b.js"
+    "static/js/main.26daa903.js"
   ]
 }

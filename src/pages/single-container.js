@@ -8,7 +8,10 @@ import Layout from "../components/layout/layout";
 import Container from "../theme/container";
 import AddSkinModal from "../components/page-components/single-container/modals/add-skin-modal";
 import {useParams} from "react-router";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {deleteItem} from "../store/containerReducer";
+import {MAXIMUM_ITEMS} from "./containers";
+import Guns from "../components/page-components/single-container/images/guns.png";
 
 const ModRowContainer = styled(RowContainer)`
   justify-content: space-between;
@@ -20,12 +23,20 @@ const ModRowContainer = styled(RowContainer)`
 
 const SingleContainer = () => {
     const [show, setShow] = useState(false)
+    const dispatch = useDispatch()
 
     const params = useParams();
     const prodId = params.id;
 
     const containers = useSelector(state => state.containers.containers)
     const container = containers.find((item) => item.id === +prodId)
+
+    const DeleteItem = (id) => {
+        dispatch(deleteItem({
+            containerId: +prodId,
+            itemId: id
+        }))
+    }
 
     return (
         <Layout>
@@ -42,7 +53,18 @@ const SingleContainer = () => {
                         {container.name}
                     </Text>
                 </div>
-                {container.data.map((item, index) => (
+                {container.data.length === 0
+                    ? <div style={{margin: "80px auto"}}>
+                        <div style={{textAlign: "center", marginBottom: "20px"}}>
+                            <Text fontWeight={300} fontSize={"32px"} color={"black"}>
+                                There is nothing here yet. Just add the skins you<br/>want by pressing “+” button below this text!
+                            </Text>
+                        </div>
+                        <div style={{display: "flex", justifyContent: "center"}}>
+                            <Image src={Guns}/>
+                        </div>
+                    </div>
+                    : container.data.map((item, index) => (
                     <ModRowContainer key={index}>
                         <RowContainer>
                             <div style={{
@@ -90,10 +112,15 @@ const SingleContainer = () => {
                             <Text color={"black"} fontSize={"16px"}>
                                 Percent benefit: {item.percentBenefit > 0 && "+"}{item.percentBenefit}%
                             </Text>
+                            <div onClick={() => DeleteItem(item.id)} style={{textAlign: "center", marginTop: "10px", cursor: "pointer"}}>
+                                <Text fontSize={"16px"} color={"black"}>
+                                    <u>Delete</u>
+                                </Text>
+                            </div>
                         </div>
                     </ModRowContainer>
                 ))}
-                <PlusButton onClick={() => setShow(true)}/>
+                {MAXIMUM_ITEMS !== container.data.length && <PlusButton onClick={() => setShow(true)}/>}
             </Container>
             {show && <AddSkinModal setShow={setShow}/>}
         </Layout>

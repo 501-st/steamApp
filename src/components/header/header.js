@@ -8,6 +8,7 @@ import Tracker from "../header/images/tracker.png"
 import Text from "../../theme/text";
 import Image from "../../theme/image";
 import Link from "../../theme/link";
+import {useSelector} from "react-redux";
 
 const HeaderWrapper = styled.div`
   background-color: #320F0F;
@@ -30,14 +31,17 @@ const RowContainerMod = styled(RowContainer)`
   border: 1px solid #320F0F;
   border-radius: 5px;
   padding: 8px;
+  position: relative;
 `;
 
 function Header() {
+    const notifications = useSelector(state => state.notifications.notifications)
+
     return (
         <HeaderWrapper>
             {/*<Link to="/">*/}
-                <Image src={Logo}/>
-           {/* </Link>*/}
+            <Image src={Logo}/>
+            {/* </Link>*/}
             <div style={{position: "absolute", left: "0", right: "0", margin: "0 auto", width: "400px"}}>
                 <RowContainer style={{columnGap: "20px"}}>
                     <Link to="/">
@@ -61,6 +65,12 @@ function Header() {
             <RowContainer style={{columnGap: "20px"}}>
                 <Link to="/notifications">
                     <RowContainerMod>
+                        {notifications.length !== 0 &&
+                        <div style={{backgroundColor: "#EB5555", borderRadius: "50%", position: "absolute", padding: "1px 5px", zIndex: "10", bottom: 10, left: 35}}>
+                            <Text fontSize={"12px"}>
+                                {notifications.length}
+                            </Text>
+                        </div>}
                         <Image width={40} height={40} margin={"0 10px 0 0"} src={Notifications}/>
                         <Text fontWeight={800}>
                             Notifications
