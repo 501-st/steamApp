@@ -42,15 +42,22 @@ const Containers = ({containers}) => {
     }
 
     useEffect(() =>{
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         containers.map((item, index) => {
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             let benefit = 0
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             item.data.map((item) => {
+                // eslint-disable-next-line react-hooks/exhaustive-deps
                 benefit += item.benefit
             })
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             dispatch(addBenefitToContainerAction({
+                // eslint-disable-next-line react-hooks/exhaustive-deps
                 containerId: index + 1,
                 benefit
             }))
+            // eslint-disable-next-line react-hooks/exhaustive-deps
         })
     }, [])
 
