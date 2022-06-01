@@ -34,15 +34,36 @@ const RowContainerMod = styled(RowContainer)`
   position: relative;
 `;
 
+const Visible = styled.div`
+  @media screen and (max-width: 1100px){
+    display: none;
+  }
+`;
+
+const AbsoluteContainer = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 400px;
+  @media screen and (max-width: 1100px){
+    position: relative;
+    margin: unset;
+    width: auto;
+  }
+`;
+
 function Header() {
     const notifications = useSelector(state => state.notifications.notifications)
 
     return (
         <HeaderWrapper>
-            {/*<Link to="/">*/}
-            <Image src={Logo}/>
-            {/* </Link>*/}
-            <div style={{position: "absolute", left: "0", right: "0", margin: "0 auto", width: "400px"}}>
+            <Visible lg xl xxl>
+                {/*<Link to="/">*/}
+                <Image src={Logo}/>
+                {/* </Link>*/}
+            </Visible>
+            <AbsoluteContainer>
                 <RowContainer style={{columnGap: "20px"}}>
                     <Link to="/">
                         <RowContainerMod>
@@ -61,7 +82,7 @@ function Header() {
                         </RowContainerMod>
                     </Link>
                 </RowContainer>
-            </div>
+            </AbsoluteContainer>
             <RowContainer style={{columnGap: "20px"}}>
                 <Link to="/notifications">
                     <RowContainerMod>

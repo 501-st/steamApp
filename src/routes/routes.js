@@ -16,7 +16,7 @@ const RoutesComponent = () => {
 
     return (
         <Routes>
-            <Route path="/" element={<Containers data={containers}/>}/>
+            <Route path="/" element={<Containers containers={containers}/>}/>
             <Route path="/login" element={<Login />}/>
             <Route path="/register" element={<Register />}/>
             <Route path="/account" element={<Account/>}/>

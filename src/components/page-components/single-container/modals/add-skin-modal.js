@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import Modal from "../../../modal/modal";
 import Text from "../../../../theme/text";
@@ -8,7 +8,9 @@ import Button from "../../../../theme/button";
 import {addItem} from "../../../../store/containerReducer";
 import {useDispatch} from "react-redux";
 import {useParams} from "react-router";
-import Gun from "../images/gun.png";
+import axios from "axios";
+import Search from "../images/search.png"
+import Image from "../../../../theme/image";
 
 const Container = styled.div`
   background: #343434;
@@ -23,6 +25,16 @@ const ModRowContainer = styled(RowContainer)`
   justify-content: space-between;
 `;
 
+const Item = styled.div`
+  background-color: white;
+  padding: 13px 0 13px 20px;
+  cursor: pointer;
+
+  :hover {
+    background-color: peachpuff;
+  }
+`;
+
 let AddSkinModal = ({setShow}) => {
 
     const dispatch = useDispatch()
@@ -32,25 +44,28 @@ let AddSkinModal = ({setShow}) => {
 
     const [item, setItem] = useState({
         name: "",
-        boughtFor: "",
-        amount: "",
-        goal: ""
+        boughtFor: 0,
+        amount: 0,
+        goal: 0,
+        image: "",
+        currentPrice: 0
     })
 
     const UpdateName = (e) => {
         setItem({...item, name: e.target.value})
+        console.log(item.name)
     }
 
     const UpdateBoughtFor = (e) => {
-        setItem({...item, boughtFor: e.target.value})
+        setItem({...item, boughtFor: +e.target.value})
     }
 
     const UpdateAmount = (e) => {
-        setItem({...item, amount: e.target.value})
+        setItem({...item, amount: +e.target.value})
     }
 
     const UpdateGoal = (e) => {
-        setItem({...item, goal: e.target.value})
+        setItem({...item, goal: +e.target.value})
     }
 
     const CancelPropagation = (event) => {
@@ -66,12 +81,35 @@ let AddSkinModal = ({setShow}) => {
                 amount: item.amount,
                 goal: item.goal,
                 containerId: +prodId,
-                benefit: 222,
-                currentPrice: 1.75,
-                percentBenefit: 46,
-                image: Gun,
+                benefit: (item.currentPrice - item.boughtFor)*item.amount,
+                currentPrice: item.currentPrice,
+                percentBenefit: Math.round(item.currentPrice / item.boughtFor * 100 - 100),
+                image: item.image,
             }))
         setShow(false)
+    }
+
+    const [resultOfSearch, setResultOfSearch] = useState("")
+
+    const MakeSearch = () => {
+        axios.get(`https://steam-hits.herokuapp.com/https://steamcommunity.com/market/search/render/?query=${item.name}&search_descriptions=0&appid=730&start=0&count=5&norender=1`)
+            .then(res => {
+                console.log(res)
+                setResultOfSearch(res.data.results)
+            }).catch(error => console.log(error))
+    }
+
+    useEffect(() => {
+        setResultOfSearch("")
+    }, [item.name])
+
+    const ChooseItem = (object) => {
+        setItem({
+            ...item,
+            name: object.hash_name,
+            currentPrice: +object.sell_price_text.replace(/[\s,]/g, '').slice(1, object.sell_price_text.length),
+            image: `https://community.akamai.steamstatic.com/economy/image/${object.asset_description.icon_url}`
+        })
     }
 
     return (
@@ -83,12 +121,28 @@ let AddSkinModal = ({setShow}) => {
                             Add new skin
                         </Text>
                     </div>
-                    <div style={{marginBottom: "52px"}}>
-                        <Input value={item.name} onChange={UpdateName} margin={"0 0 20px 0"}
-                               width={"calc(100% - 22px)"} placeholder={"Search..."}/>
+                    <div style={{marginBottom: "52px", position: "relative"}}>
+                        <div style={{position: "relative"}}>
+                            <Input id={"search"} value={item.name} onChange={UpdateName} margin={"0 0 20px 0"}
+                                   width={"calc(100% - 22px)"} placeholder={"Search..."}/>
+                            <div style={{position: "absolute", right: 10, top: 13, cursor: "pointer"}}
+                                 onClick={MakeSearch}>
+                                <Image src={Search}/>
+                            </div>
+                        </div>
+                        {resultOfSearch.length > 0 && item.name !== "" &&
+                        <div style={{position: 'absolute', width: "100%", top: 50, borderRadius: "10px"}}>
+                            {resultOfSearch.map((item, index) => (
+                                <Item key={index} onClick={() => ChooseItem(item)}>
+                                    <Text fontSize={"14px"} color={"black"}>
+                                        {item.hash_name}
+                                    </Text>
+                                </Item>
+                            ))}
+                        </div>}
                         <ModRowContainer>
                             <Input value={item.boughtFor} onChange={UpdateBoughtFor} width={"40%"}
-                                   margin={"0 0 20px 0"} placeholder={"Bought for"}/>
+                                   margin={"0 0 20px 0"} placeholder={"Cost of one item"}/>
                             <Input value={item.amount} onChange={UpdateAmount} width={"40%"} margin={"0 0 20px 0"}
                                    placeholder={"Amount"}/>
                         </ModRowContainer>

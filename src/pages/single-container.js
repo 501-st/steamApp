@@ -97,14 +97,14 @@ const SingleContainer = () => {
                                 </div>
                                 <div style={{backgroundColor: "white", padding: "5px 15px", borderRadius: "5px"}}>
                                     <Text color={"black"} fontSize={"16px"}>
-                                        Bought for: {item.boughtFor}$
+                                        Cost of one item: {item.boughtFor}$
                                     </Text>
                                 </div>
                             </div>
                         </RowContainer>
-                        <div style={{backgroundColor: item.benefit >= 0 ? "#C3FEC5" : "#FEC3C3", borderRadius: "5px", padding: "8px 15px", marginLeft: "20px"}}>
+                        <div style={{backgroundColor: item.benefit >= 0 ? "#C3FEC5" : "#FEC3C3", borderRadius: "5px", padding: "8px 15px", marginLeft: "20px", width: "210px", textAlign: "center"}}>
                             <Text color={"black"} fontSize={"16px"}>
-                                Overall benefit: {item.benefit}$
+                                Overall benefit: {+item.benefit.toFixed(4)}$
                             </Text>
                             <Text color={"black"} fontSize={"16px"}>
                                 Current price: {item.currentPrice}$
@@ -112,7 +112,7 @@ const SingleContainer = () => {
                             <Text color={"black"} fontSize={"16px"}>
                                 Percent benefit: {item.percentBenefit > 0 && "+"}{item.percentBenefit}%
                             </Text>
-                            <div onClick={() => DeleteItem(item.id)} style={{textAlign: "center", marginTop: "10px", cursor: "pointer"}}>
+                            <div onClick={() => DeleteItem(item.id)} style={{margin: "10px auto 0", cursor: "pointer", width: "fit-content", display: "flex", alignItems: "center"}}>
                                 <Text fontSize={"16px"} color={"black"}>
                                     <u>Delete</u>
                                 </Text>

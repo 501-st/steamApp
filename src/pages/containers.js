@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import {RowContainer} from "../components/header/header";
 import Text from "../theme/text";
@@ -9,10 +9,12 @@ import Image from "../theme/image";
 import PlusButton from "../components/page-components/containers/plus-button";
 import Layout from "../components/layout/layout";
 import Container from "../theme/container";
-import AddContainerModal from "../components/page-components/containers/modals/add-bag-modal";
+import AddContainerModal from "../components/page-components/containers/modals/add-container-modal";
 import ContainersImage from "../components/page-components/containers/images/containers.png";
 import UpgradeModal from "../components/page-components/containers/modals/upgrade-modal";
 import ConfirmDeletionModal from "../components/page-components/containers/modals/confirm-deletion-modal";
+import {useDispatch} from "react-redux";
+import {addBenefitToContainerAction} from "../store/containerReducer";
 
 const ModRowContainer = styled(RowContainer)`
   justify-content: space-between;
@@ -22,7 +24,9 @@ const ModRowContainer = styled(RowContainer)`
 const MAXIMUM_CONTAINERS = 5
 export const MAXIMUM_ITEMS = 5
 
-const Containers = ({data}) => {
+const Containers = ({containers}) => {
+    const dispatch = useDispatch()
+
     const [show, setShow] = useState(false)
     const [showUpgrade, setShowUpgrade] = useState(false)
     const [showDelete, setShowDelete] = useState({
@@ -37,13 +41,26 @@ const Containers = ({data}) => {
         })
     }
 
+    useEffect(() =>{
+        containers.map((item, index) => {
+            let benefit = 0
+            item.data.map((item) => {
+                benefit += item.benefit
+            })
+            dispatch(addBenefitToContainerAction({
+                containerId: index + 1,
+                benefit
+            }))
+        })
+    }, [])
+
     return (
         <Layout>
             <Container>
                 <ModRowContainer style={{marginBottom: "25px", marginTop: "40px"}}>
                     <div style={{borderRadius: "10px", backgroundColor: "#DDDDDD", padding: "10px 15px"}}>
                         <Text color={"black"} fontSize={"20px"}>
-                            Investment bags: {data.length}/{MAXIMUM_CONTAINERS}
+                            Investment bags: {containers.length}/{MAXIMUM_CONTAINERS}
                         </Text>
                     </div>
                     <Text color={"black"} fontSize={"14px"}>
@@ -52,11 +69,12 @@ const Containers = ({data}) => {
                     </Text>
                 </ModRowContainer>
                 <ModRowContainer style={{justifyContent: "initial", columnGap: "67px"}}>
-                    {data.length === 0
+                    {containers.length === 0
                         ? <div style={{margin: "80px auto"}}>
                             <div style={{textAlign: "center", marginBottom: "20px"}}>
                                 <Text fontWeight={300} fontSize={"32px"} color={"black"}>
-                                    There are no investment bags yet. Just try to<br/>create one using “+” button below this
+                                    There are no investment bags yet. Just try to<br/>create one using “+” button below
+                                    this
                                     text!
                                 </Text>
                             </div>
@@ -64,7 +82,7 @@ const Containers = ({data}) => {
                                 <Image src={ContainersImage}/>
                             </div>
                         </div>
-                        : data.map((item, index) => (
+                        : containers.map((item, index) => (
                             <div key={index} style={{
                                 padding: "18px",
                                 backgroundColor: "rgba(50, 15, 15, 0.4)",
@@ -119,7 +137,7 @@ const Containers = ({data}) => {
                             </div>
                         ))}
                 </ModRowContainer>
-                {MAXIMUM_CONTAINERS !== data.length && <PlusButton onClick={() => setShow(true)}/>}
+                {MAXIMUM_CONTAINERS !== containers.length && <PlusButton onClick={() => setShow(true)}/>}
             </Container>
             {show && <AddContainerModal setShow={setShow}/>}
             {showUpgrade && <UpgradeModal setShow={setShowUpgrade}/>}

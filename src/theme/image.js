@@ -9,7 +9,7 @@ const Container = styled.div`
 const Image = ({src, margin, width, height}) => {
     return(
        <Container margin={margin}>
-           <img width={width} height={height} src={src} alt={"There must be an something beautiful, sorry ^_^"}/>
+           <img width={width} height={height} src={src} alt={"There must be something beautiful, sorry ^_^"}/>
        </Container>
     )
 }

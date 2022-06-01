@@ -6,6 +6,7 @@ const ADD_CONTAINER = "ADD_CONTAINER"
 const REMOVE_CONTAINER = "REMOVE_CONTAINER"
 
 const ADD_ITEM = "ADD_ITEM"
+const ADD_BENEFIT = "ADD_BENEFIT"
 const DELETE_ITEM = "DELETE_ITEM"
 
 let indexOfContainer = 0
@@ -22,6 +23,14 @@ export const containerReducer = (state = defaultState, action) => {
                 ...state, containers: state.containers.map((container) => {
                     if (container.id === action.payload.containerId) {
                         return {...container, data: [...container.data, action.payload]}
+                    } else return container
+                })
+            }
+        case ADD_BENEFIT:
+            return {
+                ...state, containers: state.containers.map((container) => {
+                    if (container.id === action.payload.containerId) {
+                        return {...container, benefit: action.payload.benefit}
                     } else return container
                 })
             }
@@ -50,6 +59,13 @@ export const addContainerAction = (payload) => {
 export const removeContainerAction = (payload) => {
     return {
         type: REMOVE_CONTAINER,
+        payload
+    }
+}
+
+export const addBenefitToContainerAction = (payload) => {
+    return {
+        type: ADD_BENEFIT,
         payload
     }
 }
