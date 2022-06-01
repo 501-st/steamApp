@@ -42,23 +42,28 @@ const Containers = ({containers}) => {
     }
 
     useEffect(() =>{
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        containers.map((item, index) => {
-            // eslint-disable-next-line react-hooks/exhaustive-deps
+        /*containers.map((item, index) => {
             let benefit = 0
-            // eslint-disable-next-line react-hooks/exhaustive-deps
             item.data.map((item) => {
-                // eslint-disable-next-line react-hooks/exhaustive-deps
                 benefit += item.benefit
             })
-            // eslint-disable-next-line react-hooks/exhaustive-deps
             dispatch(addBenefitToContainerAction({
-                // eslint-disable-next-line react-hooks/exhaustive-deps
                 containerId: index + 1,
                 benefit
             }))
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-        })
+        })*/
+
+        for (let i = 0; i < containers.length; i++){
+            let benefit = 0
+            for (let j = 0; j < containers[i].data.length; j++){
+                benefit += containers[i].data[j].benefit
+            }
+            dispatch(addBenefitToContainerAction({
+                containerId: i + 1,
+                benefit
+            }))
+        }
+        //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
