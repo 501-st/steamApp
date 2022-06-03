@@ -69,7 +69,8 @@ function Header() {
                     if (containers[i].data[j].percentBenefit >= containers[i].data[j].goal)
                         dispatch(addNotificationAction({
                             name: containers[i].data[j].name,
-                            link: i + 1
+                            link: i + 1,
+                            itemId: j + 1
                         }))
                 }
                 dispatch(containerCheckedAction({

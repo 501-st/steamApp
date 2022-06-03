@@ -15,7 +15,7 @@ export const notificationReducer = (state = defaultState,
         case ADD_NOTIFICATION:
             return {...state, notifications: [...state.notifications, action.payload]}
         case REMOVE_NOTIFICATION:
-            return {...state, notifications: state.notifications.filter(notification => notification.id !== action.payload)}
+            return {...state, notifications: state.notifications.filter(notification => notification.itemId !== action.payload)}
         case REMOVE_NOTIFICATIONS_IN_CONTAINER:
             return {...state, notifications: state.notifications.filter(notification => notification.link !== action.payload)}
         case REMOVE_ALL_NOTIFICATIONS:
