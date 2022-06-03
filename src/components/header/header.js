@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from "styled-components";
 import Logo from "../header/images/logo.png"
 import Profile from "../header/images/profile.png"
@@ -8,7 +8,9 @@ import Tracker from "../header/images/tracker.png"
 import Text from "../../theme/text";
 import Image from "../../theme/image";
 import Link from "../../theme/link";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {addNotificationAction} from "../../store/notificationsReducer";
+import {containerCheckedAction} from "../../store/containerReducer";
 
 const HeaderWrapper = styled.div`
   background-color: #320F0F;
@@ -35,7 +37,7 @@ const RowContainerMod = styled(RowContainer)`
 `;
 
 const Visible = styled.div`
-  @media screen and (max-width: 1100px){
+  @media screen and (max-width: 1100px) {
     display: none;
   }
 `;
@@ -46,7 +48,7 @@ const AbsoluteContainer = styled.div`
   right: 0;
   margin: 0 auto;
   width: 400px;
-  @media screen and (max-width: 1100px){
+  @media screen and (max-width: 1100px) {
     position: relative;
     margin: unset;
     width: auto;
@@ -54,7 +56,35 @@ const AbsoluteContainer = styled.div`
 `;
 
 function Header() {
+    const containers = useSelector(state => state.containers.containers)
+    console.log(containers)
+    const dispatch = useDispatch()
     const notifications = useSelector(state => state.notifications.notifications)
+
+    useEffect(() => {
+        console.log(notifications)
+        for (let i = 0; i < containers.length; i++) {
+            if (!containers[i].checked) {
+                for (let j = 0; j < containers[i].data.length; j++) {
+                    if (containers[i].data[j].percentBenefit >= containers[i].data[j].goal)
+                        dispatch(addNotificationAction({
+                            name: containers[i].data[j].name,
+                            link: i + 1
+                        }))
+                }
+                dispatch(containerCheckedAction({
+                    containerId: i + 1
+                }))
+            }
+        }
+        /* for (let i = 0; i < containers.length; i++){
+             if (containers[i].data[containers[i].data.length - 1].percentBenefit >= containers[i].data[containers[i].data.length - 1].goal)
+                 dispatch(addNotificationAction({
+                     name: containers[i].data[containers[i].data.length - 1].name
+                 }))
+         }*/
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <HeaderWrapper>
@@ -87,7 +117,15 @@ function Header() {
                 <Link to="/notifications">
                     <RowContainerMod>
                         {notifications.length !== 0 &&
-                        <div style={{backgroundColor: "#EB5555", borderRadius: "50%", position: "absolute", padding: "1px 5px", zIndex: "10", bottom: 10, left: 35}}>
+                        <div style={{
+                            backgroundColor: "#EB5555",
+                            borderRadius: "50%",
+                            position: "absolute",
+                            padding: "1px 5px",
+                            zIndex: "10",
+                            bottom: 10,
+                            left: 35
+                        }}>
                             <Text fontSize={"12px"}>
                                 {notifications.length}
                             </Text>

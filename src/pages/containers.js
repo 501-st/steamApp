@@ -58,6 +58,7 @@ const Containers = ({containers}) => {
             for (let j = 0; j < containers[i].data.length; j++){
                 benefit += containers[i].data[j].benefit
             }
+            benefit = +benefit.toFixed(4)
             dispatch(addBenefitToContainerAction({
                 containerId: i + 1,
                 benefit
@@ -72,7 +73,7 @@ const Containers = ({containers}) => {
                 <ModRowContainer style={{marginBottom: "25px", marginTop: "40px"}}>
                     <div style={{borderRadius: "10px", backgroundColor: "#DDDDDD", padding: "10px 15px"}}>
                         <Text color={"black"} fontSize={"20px"}>
-                            Investment bags: {containers.length}/{MAXIMUM_CONTAINERS}
+                            Investment containers: {containers.length}/{MAXIMUM_CONTAINERS}
                         </Text>
                     </div>
                     <Text color={"black"} fontSize={"14px"}>
@@ -85,7 +86,7 @@ const Containers = ({containers}) => {
                         ? <div style={{margin: "80px auto"}}>
                             <div style={{textAlign: "center", marginBottom: "20px"}}>
                                 <Text fontWeight={300} fontSize={"32px"} color={"black"}>
-                                    There are no investment bags yet. Just try to<br/>create one using “+” button below
+                                    There are no investment containers yet. Just try to<br/>create one using “+” button below
                                     this
                                     text!
                                 </Text>
@@ -123,13 +124,14 @@ const Containers = ({containers}) => {
                                     </Text>
                                 </div>
                                 <div style={{
-                                    backgroundColor: item.benefit >= 0 ? "#C3FEC5" : "#FEC3C3",
+                                    backgroundColor: item.benefit && item.benefit >= 0 ? "#C3FEC5"
+                                        : item.benefit && item.benefit < 0 ? "#FEC3C3" : "#C3FEC5",
                                     padding: "6px 7px",
                                     borderRadius: "5px",
                                     marginBottom: "30px",
                                 }}>
                                     <Text fontSize={"16px"} color={"black"}>
-                                        Overall benefit: {item.benefit}$
+                                        Overall benefit: {item.benefit ? item.benefit : 0}$
                                     </Text>
                                 </div>
                                 <ModRowContainer>

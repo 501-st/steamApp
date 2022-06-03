@@ -5,12 +5,13 @@ import Text from "../../../../theme/text";
 import Input from "../../../../theme/input";
 import {RowContainer} from "../../../header/header";
 import Button from "../../../../theme/button";
-import {addItem} from "../../../../store/containerReducer";
+import {addItem, containerCheckedAction} from "../../../../store/containerReducer";
 import {useDispatch} from "react-redux";
 import {useParams} from "react-router";
 import axios from "axios";
 import Search from "../images/search.png"
 import Image from "../../../../theme/image";
+import {addNotificationAction} from "../../../../store/notificationsReducer";
 
 const Container = styled.div`
   background: #343434;
@@ -48,12 +49,12 @@ let AddSkinModal = ({setShow}) => {
         amount: 0,
         goal: 0,
         image: "",
-        currentPrice: 0
+        currentPrice: 0,
+        rarity: ""
     })
 
     const UpdateName = (e) => {
         setItem({...item, name: e.target.value})
-        console.log(item.name)
     }
 
     const UpdateBoughtFor = (e) => {
@@ -81,11 +82,22 @@ let AddSkinModal = ({setShow}) => {
                 amount: item.amount,
                 goal: item.goal,
                 containerId: +prodId,
-                benefit: (item.currentPrice - item.boughtFor)*item.amount,
+                benefit: (item.currentPrice - item.boughtFor) * item.amount,
                 currentPrice: item.currentPrice,
                 percentBenefit: Math.round(item.currentPrice / item.boughtFor * 100 - 100),
                 image: item.image,
+                rarity: item.rarity,
+                isChecked: false
             }))
+        if (Math.round(item.currentPrice / item.boughtFor * 100 - 100) >= item.goal) {
+            dispatch(addNotificationAction({
+                name: item.name,
+                link: +prodId
+            }))
+            dispatch(containerCheckedAction({
+                containerId: +prodId
+            }))
+        }
         setShow(false)
     }
 
@@ -94,7 +106,7 @@ let AddSkinModal = ({setShow}) => {
     const MakeSearch = () => {
         axios.get(`https://steam-hits.herokuapp.com/https://steamcommunity.com/market/search/render/?query=${item.name}&search_descriptions=0&appid=730&start=0&count=5&norender=1`)
             .then(res => {
-                console.log(res)
+                console.log(res.data.results)
                 setResultOfSearch(res.data.results)
             }).catch(error => console.log(error))
     }
@@ -108,7 +120,8 @@ let AddSkinModal = ({setShow}) => {
             ...item,
             name: object.hash_name,
             currentPrice: +object.sell_price_text.replace(/[\s,]/g, '').slice(1, object.sell_price_text.length),
-            image: `https://community.akamai.steamstatic.com/economy/image/${object.asset_description.icon_url}`
+            image: `https://community.akamai.steamstatic.com/economy/image/${object.asset_description.icon_url}`,
+            rarity: object.asset_description.type.split(",")[object.asset_description.type.split(",").length - 1].slice(1)
         })
     }
 

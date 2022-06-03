@@ -7,6 +7,7 @@ import Layout from "../components/layout/layout";
 import Container from "../theme/container";
 import {useDispatch, useSelector} from "react-redux";
 import {removeAllNotificationsAction, removeNotificationAction} from "../store/notificationsReducer";
+import Link from "../theme/link";
 
 const ModRowContainer = styled(RowContainer)`
   justify-content: space-between;
@@ -62,7 +63,7 @@ const Notifications = () => {
                                 borderRadius: "5px"
                             }}>
                                 <Text color={"black"} fontSize={"16px"}>
-                                    Your {item.name} has reached percent goal. Please, check your investment bag.
+                                    Your {item.name} has reached percent goal. Please, check your investment container.
                                 </Text>
                             </div>
                             <ModRowContainer style={{justifyContent: "end", columnGap: "15px", marginTop: "20px"}}>
@@ -72,12 +73,14 @@ const Notifications = () => {
                                         Mark as read
                                     </Text>
                                 </Button>
-                                <Button borderRadius={"5px"} padding={"5px 9px"} background={"#DDDDDD"}
-                                        border={"black"}>
-                                    <Text color={"black"} fontSize={"16px"}>
-                                        To investment bag
-                                    </Text>
-                                </Button>
+                                <Link to={`/container/${item.link}`}>
+                                    <Button borderRadius={"5px"} padding={"5px 9px"} background={"#DDDDDD"}
+                                            border={"black"}>
+                                        <Text color={"black"} fontSize={"16px"}>
+                                            To investment container
+                                        </Text>
+                                    </Button>
+                                </Link>
                             </ModRowContainer>
                         </div>
                     ))}

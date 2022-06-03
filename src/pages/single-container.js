@@ -12,6 +12,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {deleteItem} from "../store/containerReducer";
 import {MAXIMUM_ITEMS} from "./containers";
 import Guns from "../components/page-components/single-container/images/guns.png";
+import {removeNotificationAction} from "../store/notificationsReducer";
 
 const ModRowContainer = styled(RowContainer)`
   justify-content: space-between;
@@ -36,6 +37,66 @@ const SingleContainer = () => {
             containerId: +prodId,
             itemId: id
         }))
+        dispatch(removeNotificationAction(id))
+    }
+
+    const rarityArray = [{
+        rarity: "базового класса",
+        color: "rgb(176, 195, 217)"
+    },{
+        rarity: "Армейское качество",
+        color: "rgb(75, 105, 255)"
+    },{
+        rarity: "Ширпотреб",
+        color: "rgb(176, 195, 217)"
+    },{
+        rarity: "Промышленное качество",
+        color: "rgb(94, 152, 217)"
+    },{
+        rarity: "Запрещённое",
+        color: "rgb(136, 71, 255)"
+    },{
+        rarity: "Засекреченное",
+        color: "rgb(211, 44, 230)"
+    },{
+        rarity: "Тайное",
+        color: "rgb(235, 75, 75)"
+    },{
+        rarity: "Исключительный",
+        color: "rgb(136, 71, 255)"
+    },{
+        rarity: "Заслуженный",
+        color: "rgb(75, 105, 255)"
+    },{
+        rarity: "Превосходный",
+        color: "rgb(211, 44, 230)"
+    },{
+        rarity: "Мастерский",
+        color: "rgb(235, 75, 75)"
+    },{
+        rarity: "экстраординарного типа",
+        color: "rgb(235, 75, 75)"
+    },{
+        rarity: "высшего класса",
+        color: "rgb(75, 105, 255)"
+    },{
+        rarity: "примечательного типа",
+        color: "rgb(136, 71, 255)"
+    },{
+        rarity: "экзотичного вида",
+        color: "rgb(211, 44, 230)"
+    },{
+        rarity: "Контрабанда",
+        color: "rgb(228, 174, 57)"
+    }]
+
+    const FindRarity = (item) => {
+        for (let i = 0; i < rarityArray.length; i++){
+            if (item.rarity === rarityArray[i].rarity)
+                return rarityArray[i].color
+        }
+        console.log("Rarity:", item.rarity)
+        return ""
     }
 
     return (
@@ -76,7 +137,7 @@ const SingleContainer = () => {
                             </div>
                             <div>
                                 <div style={{
-                                    backgroundColor: "#8847FF",
+                                    backgroundColor: FindRarity(item),
                                     padding: "5px 15px",
                                     borderRadius: "5px",
                                     marginBottom: "10px"

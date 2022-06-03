@@ -33,7 +33,8 @@ let AddContainerModal = ({setShow}) => {
         dispatch(addContainerAction(
             {
                 name: value,
-                data: []
+                data: [],
+                checked: true
             }))
         setShow(false)
     }

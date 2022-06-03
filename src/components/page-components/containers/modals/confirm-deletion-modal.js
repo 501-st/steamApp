@@ -5,6 +5,7 @@ import Text from "../../../../theme/text";
 import Button from "../../../../theme/button";
 import {useDispatch} from "react-redux";
 import {removeContainerAction} from "../../../../store/containerReducer";
+import {removeNotificationsInContainerAction} from "../../../../store/notificationsReducer";
 
 const Container = styled.div`
   background: #343434;
@@ -19,6 +20,11 @@ let ConfirmDeletionModal = ({setShow, id}) => {
 
     const dispatch = useDispatch();
 
+    const RemoveContainer = () => {
+        dispatch(removeContainerAction(id))
+        dispatch(removeNotificationsInContainerAction(id))
+    }
+
     return (
         <Modal setShow={setShow}>
                 <Container>
@@ -28,7 +34,7 @@ let ConfirmDeletionModal = ({setShow, id}) => {
                         </Text>
                     </div>
                     <div style={{textAlign: "center"}}>
-                        <Button onClick={() => dispatch(removeContainerAction(id))} padding={"10px 20px"}>
+                        <Button onClick={RemoveContainer} padding={"10px 20px"}>
                             <Text color={"black"} fontSize={"16px"}>
                                 Yes, I’m sure
                             </Text>
