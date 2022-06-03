@@ -10,7 +10,7 @@ import Image from "../../theme/image";
 import Link from "../../theme/link";
 import {useDispatch, useSelector} from "react-redux";
 import {addNotificationAction} from "../../store/notificationsReducer";
-import {containerCheckedAction} from "../../store/containerReducer";
+import {containerCheckedAction, indexOfItem} from "../../store/containerReducer";
 
 const HeaderWrapper = styled.div`
   background-color: #320F0F;
@@ -62,7 +62,6 @@ function Header() {
     const notifications = useSelector(state => state.notifications.notifications)
 
     useEffect(() => {
-        console.log(notifications)
         for (let i = 0; i < containers.length; i++) {
             if (!containers[i].checked) {
                 for (let j = 0; j < containers[i].data.length; j++) {
@@ -70,7 +69,7 @@ function Header() {
                         dispatch(addNotificationAction({
                             name: containers[i].data[j].name,
                             link: i + 1,
-                            itemId: j + 1
+                            itemId: indexOfItem
                         }))
                 }
                 dispatch(containerCheckedAction({
@@ -78,6 +77,7 @@ function Header() {
                 }))
             }
         }
+        console.log(notifications)
         /* for (let i = 0; i < containers.length; i++){
              if (containers[i].data[containers[i].data.length - 1].percentBenefit >= containers[i].data[containers[i].data.length - 1].goal)
                  dispatch(addNotificationAction({

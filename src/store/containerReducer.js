@@ -11,8 +11,8 @@ const DELETE_ITEM = "DELETE_ITEM"
 const CONTAINER_STATUS_CHECKED = "CONTAINER_STATUS_CHECKED"
 const ALL_CONTAINERS_STATUS_UNCHECKED = "ALL_CONTAINERS_STATUS_UNCHECKED"
 
-let indexOfContainer = 0
-let indexOfItem = 0
+export let indexOfContainer = 0
+export let indexOfItem = 0
 
 export const containerReducer = (state = defaultState, action) => {
     switch (action.type) {

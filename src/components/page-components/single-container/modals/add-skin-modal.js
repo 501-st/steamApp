@@ -5,7 +5,7 @@ import Text from "../../../../theme/text";
 import Input from "../../../../theme/input";
 import {RowContainer} from "../../../header/header";
 import Button from "../../../../theme/button";
-import {addItem, containerCheckedAction} from "../../../../store/containerReducer";
+import {addItem, containerCheckedAction, indexOfItem} from "../../../../store/containerReducer";
 import {useDispatch} from "react-redux";
 import {useParams} from "react-router";
 import axios from "axios";
@@ -92,12 +92,13 @@ let AddSkinModal = ({setShow}) => {
         if (Math.round(item.currentPrice / item.boughtFor * 100 - 100) >= item.goal) {
             dispatch(addNotificationAction({
                 name: item.name,
-                link: +prodId
-            }))
-            dispatch(containerCheckedAction({
-                containerId: +prodId
+                link: +prodId,
+                itemId: indexOfItem
             }))
         }
+        dispatch(containerCheckedAction({
+            containerId: +prodId
+        }))
         setShow(false)
     }
 
