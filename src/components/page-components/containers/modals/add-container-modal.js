@@ -18,9 +18,11 @@ const Container = styled.div`
 let AddContainerModal = ({setShow}) => {
 
     const [value, setValue] = useState("")
+    const [error, setError] = useState("")
     const dispatch = useDispatch()
 
     const UpdateInputValue = (e) => {
+        setError("")
         setValue(e.target.value)
     }
 
@@ -30,6 +32,10 @@ let AddContainerModal = ({setShow}) => {
 
     const DoNotReloadPage = (event) => {
         event.preventDefault()
+        if (value === ""){
+            setError("Введите название контейнера")
+            return false
+        }
         dispatch(addContainerAction(
             {
                 name: value,
@@ -53,6 +59,11 @@ let AddContainerModal = ({setShow}) => {
                             Please, enter investment bag’s name:
                         </Text>
                     </div>
+                    {error !== "" && <div style={{position: "absolute", right: 0, left: 0, bottom: 120, marginRight: "auto", marginLeft: "auto", textAlign: "center"}}>
+                        <Text fontSize={"20px"} color={"red"}>
+                            {error}
+                        </Text>
+                    </div>}
                     <div>
                         <Input value={value} onChange={UpdateInputValue} width={"calc(100% - 22px)"}
                                placeholder={"Name"}/>

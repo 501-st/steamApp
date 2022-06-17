@@ -26,9 +26,6 @@ const RoutesComponent = () => {
                     <Route key={index} path=":id" element={<SingleContainer/>}/>
                 ))}
             </Route>
-            {/*{containers.map((item, index) => (
-                <Route key={index} path={`/single-container/` + item.id} element={<SingleContainer name={item.name} data={item.data}/>}/>
-            ))}*/}
             <Route path="*" element={<NotFound/>}/>
         </Routes>
     )

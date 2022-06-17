@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import styled from "styled-components";
 import Logo from "../header/images/logo.png"
 import Profile from "../header/images/profile.png"
-import Inventory from "../header/images/inventory.png"
+/*import Inventory from "../header/images/inventory.png"*/
 import Notifications from "../header/images/notifications.png"
 import Tracker from "../header/images/tracker.png"
 import Text from "../../theme/text";
@@ -30,8 +30,6 @@ export const RowContainer = styled.div`
 
 
 const RowContainerMod = styled(RowContainer)`
-  border: 1px solid #320F0F;
-  border-radius: 5px;
   padding: 8px;
   position: relative;
 `;
@@ -47,7 +45,7 @@ const AbsoluteContainer = styled.div`
   left: 0;
   right: 0;
   margin: 0 auto;
-  width: 400px;
+  width: 200px;
   @media screen and (max-width: 1100px) {
     position: relative;
     margin: unset;
@@ -57,7 +55,7 @@ const AbsoluteContainer = styled.div`
 
 function Header() {
     const containers = useSelector(state => state.containers.containers)
-    console.log(containers)
+    console.log("Containers", containers)
     const dispatch = useDispatch()
     const notifications = useSelector(state => state.notifications.notifications)
 
@@ -77,7 +75,7 @@ function Header() {
                 }))
             }
         }
-        console.log(notifications)
+        console.log("Notifications", notifications)
         /* for (let i = 0; i < containers.length; i++){
              if (containers[i].data[containers[i].data.length - 1].percentBenefit >= containers[i].data[containers[i].data.length - 1].goal)
                  dispatch(addNotificationAction({
@@ -96,7 +94,7 @@ function Header() {
             </Visible>
             <AbsoluteContainer>
                 <RowContainer style={{columnGap: "20px"}}>
-                    <Link to="/">
+                    <Link header to="/">
                         <RowContainerMod>
                             <Image width={40} margin={"0 10px 0 0"} src={Tracker}/>
                             <Text fontWeight={800}>
@@ -104,18 +102,18 @@ function Header() {
                             </Text>
                         </RowContainerMod>
                     </Link>
-                    <Link to="/inventory">
+                    {/*<Link to="/inventory">
                         <RowContainerMod>
                             <Image width={40} margin={"0 8px 0 0"} src={Inventory}/>
                             <Text fontWeight={800}>
                                 Inventory
                             </Text>
                         </RowContainerMod>
-                    </Link>
+                    </Link>*/}
                 </RowContainer>
             </AbsoluteContainer>
             <RowContainer style={{columnGap: "20px"}}>
-                <Link to="/notifications">
+                <Link header to="/notifications">
                     <RowContainerMod>
                         {notifications.length !== 0 &&
                         <div style={{
@@ -137,7 +135,7 @@ function Header() {
                         </Text>
                     </RowContainerMod>
                 </Link>
-                <Link to="/account">
+                <Link header to="/account">
                     <RowContainerMod>
                         <Image width={40} margin={"0 10px 0 0"} src={Profile}/>
                         <Text fontWeight={800}>

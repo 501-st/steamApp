@@ -9,7 +9,6 @@ const ADD_ITEM = "ADD_ITEM"
 const ADD_BENEFIT = "ADD_BENEFIT"
 const DELETE_ITEM = "DELETE_ITEM"
 const CONTAINER_STATUS_CHECKED = "CONTAINER_STATUS_CHECKED"
-const ALL_CONTAINERS_STATUS_UNCHECKED = "ALL_CONTAINERS_STATUS_UNCHECKED"
 
 export let indexOfContainer = 0
 export let indexOfItem = 0
@@ -26,12 +25,6 @@ export const containerReducer = (state = defaultState, action) => {
                     if (container.id === action.payload.containerId) {
                         return {...container, checked: true}
                     } else return container
-                })
-            }
-        case ALL_CONTAINERS_STATUS_UNCHECKED:
-            return {
-                ...state, containers: state.containers.map((container) => {
-                    return {...container, checked: false}
                 })
             }
         case ADD_ITEM:
@@ -87,12 +80,6 @@ export const containerCheckedAction = (payload) => {
     return {
         type: CONTAINER_STATUS_CHECKED,
         payload
-    }
-}
-
-export const containersUncheckedAction = () => {
-    return {
-        type: ALL_CONTAINERS_STATUS_UNCHECKED,
     }
 }
 

@@ -1,12 +1,17 @@
 import React from 'react';
 import "../index.css"
+import styled from "styled-components";
 import { NavLink } from "react-router-dom"
 
-const Link = ({to, children}) => {
+const OwnLink = styled(NavLink)`
+  border: ${props => props.header ? "1px solid #320F0F" : ""};
+`;
+
+const Link = ({to, children, header = false}) => {
     return(
-        <NavLink className={({isActive}) => isActive ? "active" : ""} style={{textDecoration: "none", color: "inherit"}} to={to}>
+        <OwnLink header={header} style={{textDecoration: "none", color: "inherit"}} to={to}>
             {children}
-        </NavLink>
+        </OwnLink>
     )
 }
 

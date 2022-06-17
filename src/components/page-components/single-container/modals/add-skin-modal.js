@@ -53,19 +53,25 @@ let AddSkinModal = ({setShow}) => {
         rarity: ""
     })
 
+    const [error, setError] = useState("")
+
     const UpdateName = (e) => {
+        setError("")
         setItem({...item, name: e.target.value})
     }
 
     const UpdateBoughtFor = (e) => {
+        setError("")
         setItem({...item, boughtFor: +e.target.value})
     }
 
     const UpdateAmount = (e) => {
+        setError("")
         setItem({...item, amount: +e.target.value})
     }
 
     const UpdateGoal = (e) => {
+        setError("")
         setItem({...item, goal: +e.target.value})
     }
 
@@ -75,6 +81,31 @@ let AddSkinModal = ({setShow}) => {
 
     const DoNotReloadPage = (event) => {
         event.preventDefault()
+        setError("")
+        if (item.name === ""){
+            setError("Введите название предмета")
+            return false
+        }
+        if (item.currentPrice === 0)
+        {
+            setError("Выберите предмет")
+            return false
+        }
+        if (item.boughtFor === 0)
+        {
+            setError("Укажите цену покупки предмета")
+            return false
+        }
+        if (item.amount === 0)
+        {
+            setError("Укажите кол-во приобретаемых предметов")
+            return false
+        }
+        if (item.goal === 0)
+        {
+            setError("Укажите ожидаемую прибыль в процентах")
+            return false
+        }
         dispatch(addItem(
             {
                 name: item.name,
@@ -86,8 +117,7 @@ let AddSkinModal = ({setShow}) => {
                 currentPrice: item.currentPrice,
                 percentBenefit: Math.round(item.currentPrice / item.boughtFor * 100 - 100),
                 image: item.image,
-                rarity: item.rarity,
-                isChecked: false
+                rarity: item.rarity
             }))
         if (Math.round(item.currentPrice / item.boughtFor * 100 - 100) >= item.goal) {
             dispatch(addNotificationAction({
@@ -105,9 +135,11 @@ let AddSkinModal = ({setShow}) => {
     const [resultOfSearch, setResultOfSearch] = useState("")
 
     const MakeSearch = () => {
+        setError("")
         axios.get(`https://steam-hits.herokuapp.com/https://steamcommunity.com/market/search/render/?query=${item.name}&search_descriptions=0&appid=730&start=0&count=5&norender=1`)
             .then(res => {
-                console.log(res.data.results)
+                if (res.data.results.length === 0)
+                    setError("Предметы с таким названием не найдены")
                 setResultOfSearch(res.data.results)
             }).catch(error => console.log(error))
     }
@@ -155,14 +187,19 @@ let AddSkinModal = ({setShow}) => {
                             ))}
                         </div>}
                         <ModRowContainer>
-                            <Input value={item.boughtFor} onChange={UpdateBoughtFor} width={"40%"}
+                            <Input type={"number"} value={item.boughtFor} onChange={UpdateBoughtFor} width={"40%"}
                                    margin={"0 0 20px 0"} placeholder={"Cost of one item"}/>
-                            <Input value={item.amount} onChange={UpdateAmount} width={"40%"} margin={"0 0 20px 0"}
+                            <Input type={"number"} value={item.amount} onChange={UpdateAmount} width={"40%"} margin={"0 0 20px 0"}
                                    placeholder={"Amount"}/>
                         </ModRowContainer>
-                        <Input value={item.goal} onChange={UpdateGoal} width={"calc(100% - 22px)"}
+                        <Input type={"number"} value={item.goal} onChange={UpdateGoal} width={"calc(100% - 22px)"}
                                placeholder={"Percent benefit goal"}/>
                     </div>
+                    {error !== "" && <div style={{position: "absolute", right: 0, left: 0, bottom: 80, marginRight: "auto", marginLeft: "auto", textAlign: "center"}}>
+                        <Text fontSize={"20px"} color={"red"}>
+                            {error}
+                        </Text>
+                    </div>}
                     <div style={{textAlign: "center"}}>
                         <Button onClick={(event) => DoNotReloadPage(event)} padding={"12px 31px"} border={"black"}
                                 background={"white"}>
