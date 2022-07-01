@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Modal from "../../../modal/modal";
 import Text from "../../../../theme/text";
 import Input from "../../../../theme/input";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addContainerAction} from "../../../../store/containerReducer";
 
 const Container = styled.div`
@@ -17,6 +17,8 @@ const Container = styled.div`
 
 let AddContainerModal = ({setShow}) => {
 
+    const containers = useSelector(state => state.containers.containers)
+    console.log(containers)
     const [value, setValue] = useState("")
     const [error, setError] = useState("")
     const dispatch = useDispatch()
@@ -35,6 +37,12 @@ let AddContainerModal = ({setShow}) => {
         if (value === ""){
             setError("Введите название контейнера")
             return false
+        }
+        for (let i = 0; i < containers.length; i++){
+            if (containers[i].name === value){
+                setError("Контейнер с таким названием уже есть")
+                return false
+            }
         }
         dispatch(addContainerAction(
             {

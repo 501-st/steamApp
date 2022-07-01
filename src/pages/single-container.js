@@ -25,6 +25,7 @@ const ModRowContainer = styled(RowContainer)`
 const SingleContainer = () => {
     const [show, setShow] = useState(false)
     const dispatch = useDispatch()
+    const isPro = useSelector(state => state.containers.isPro)
 
     const params = useParams();
     const prodId = params.id;
@@ -95,7 +96,6 @@ const SingleContainer = () => {
             if (item.rarity === rarityArray[i].rarity)
                 return rarityArray[i].color
         }
-        console.log("Rarity:", item.rarity)
         return ""
     }
 
@@ -181,7 +181,8 @@ const SingleContainer = () => {
                         </div>
                     </ModRowContainer>
                 ))}
-                {MAXIMUM_ITEMS !== container.data.length && <PlusButton onClick={() => setShow(true)}/>}
+                {!isPro ? MAXIMUM_ITEMS > container.data.length && <PlusButton onClick={() => setShow(true)}/>
+                : <PlusButton onClick={() => setShow(true)}/>}
             </Container>
             {show && <AddSkinModal setShow={setShow}/>}
         </Layout>

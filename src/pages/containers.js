@@ -13,8 +13,8 @@ import AddContainerModal from "../components/page-components/containers/modals/a
 import ContainersImage from "../components/page-components/containers/images/containers.png";
 import UpgradeModal from "../components/page-components/containers/modals/upgrade-modal";
 import ConfirmDeletionModal from "../components/page-components/containers/modals/confirm-deletion-modal";
-import {useDispatch} from "react-redux";
-import {addBenefitToContainerAction} from "../store/containerReducer";
+import {useDispatch, useSelector} from "react-redux";
+import {addBenefitToContainerAction, Downgrade} from "../store/containerReducer";
 
 const ModRowContainer = styled(RowContainer)`
   justify-content: space-between;
@@ -26,6 +26,8 @@ export const MAXIMUM_ITEMS = 5
 
 const Containers = ({containers}) => {
     const dispatch = useDispatch()
+
+    const isPro = useSelector(state => state.containers.isPro)
 
     const [show, setShow] = useState(false)
     const [showUpgrade, setShowUpgrade] = useState(false)
@@ -42,17 +44,6 @@ const Containers = ({containers}) => {
     }
 
     useEffect(() =>{
-        /*containers.map((item, index) => {
-            let benefit = 0
-            item.data.map((item) => {
-                benefit += item.benefit
-            })
-            dispatch(addBenefitToContainerAction({
-                containerId: index + 1,
-                benefit
-            }))
-        })*/
-
         for (let i = 0; i < containers.length; i++){
             let benefit = 0
             for (let j = 0; j < containers[i].data.length; j++){
@@ -73,13 +64,17 @@ const Containers = ({containers}) => {
                 <ModRowContainer style={{marginBottom: "25px", marginTop: "40px"}}>
                     <div style={{borderRadius: "10px", backgroundColor: "#DDDDDD", padding: "10px 15px"}}>
                         <Text color={"black"} fontSize={"20px"}>
-                            Investment containers: {containers.length}/{MAXIMUM_CONTAINERS}
+                            Investment containers: {containers.length}{!isPro && `/${MAXIMUM_CONTAINERS}`}
                         </Text>
                     </div>
-                    <Text color={"black"} fontSize={"14px"}>
-                        Wanna create more? <label style={{cursor: "pointer"}} onClick={() => setShowUpgrade(true)}><u>Upgrade
-                        to pro</u></label>
-                    </Text>
+                    {isPro
+                        ? <Button onClick={() => dispatch(Downgrade())} background={"yellow"} padding={"12px 20px"}>
+                            Downgrade
+                        </Button>
+                    :  <Text color={"black"} fontSize={"14px"}>
+                            Wanna create more? <label style={{cursor: "pointer"}} onClick={() => setShowUpgrade(true)}><u>Upgrade
+                            to pro</u></label>
+                        </Text>}
                 </ModRowContainer>
                 <ModRowContainer style={{justifyContent: "initial", columnGap: "67px"}}>
                     {containers.length === 0
@@ -120,7 +115,7 @@ const Containers = ({containers}) => {
                                     marginBottom: "20px"
                                 }}>
                                     <Text fontSize={"16px"} color={"black"}>
-                                        Items: {item.data.length}/{MAXIMUM_ITEMS}
+                                        Items: {item.data.length}{!isPro && `/${MAXIMUM_ITEMS}`}
                                     </Text>
                                 </div>
                                 <div style={{
@@ -151,7 +146,8 @@ const Containers = ({containers}) => {
                             </div>
                         ))}
                 </ModRowContainer>
-                {MAXIMUM_CONTAINERS !== containers.length && <PlusButton onClick={() => setShow(true)}/>}
+                {!isPro ? MAXIMUM_CONTAINERS > containers.length && <PlusButton onClick={() => setShow(true)}/>
+                    : <PlusButton onClick={() => setShow(true)}/>}
             </Container>
             {show && <AddContainerModal setShow={setShow}/>}
             {showUpgrade && <UpgradeModal setShow={setShowUpgrade}/>}

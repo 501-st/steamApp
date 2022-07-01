@@ -6,7 +6,7 @@ import Input from "../../../../theme/input";
 import {RowContainer} from "../../../header/header";
 import Button from "../../../../theme/button";
 import {addItem, containerCheckedAction, indexOfItem} from "../../../../store/containerReducer";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router";
 import axios from "axios";
 import Search from "../images/search.png"
@@ -42,6 +42,7 @@ let AddSkinModal = ({setShow}) => {
 
     const params = useParams();
     const prodId = params.id;
+    const isPro = useSelector(state => state.containers.isPro)
 
     const [item, setItem] = useState({
         name: "",
@@ -101,7 +102,7 @@ let AddSkinModal = ({setShow}) => {
             setError("Укажите кол-во приобретаемых предметов")
             return false
         }
-        if (item.goal === 0)
+        if (item.goal === 0 && isPro)
         {
             setError("Укажите ожидаемую прибыль в процентах")
             return false
@@ -192,8 +193,8 @@ let AddSkinModal = ({setShow}) => {
                             <Input type={"number"} value={item.amount} onChange={UpdateAmount} width={"40%"} margin={"0 0 20px 0"}
                                    placeholder={"Amount"}/>
                         </ModRowContainer>
-                        <Input type={"number"} value={item.goal} onChange={UpdateGoal} width={"calc(100% - 22px)"}
-                               placeholder={"Percent benefit goal"}/>
+                        {isPro && <Input type={"number"} value={item.goal} onChange={UpdateGoal} width={"calc(100% - 22px)"}
+                                       placeholder={"Percent benefit goal"}/>}
                     </div>
                     {error !== "" && <div style={{position: "absolute", right: 0, left: 0, bottom: 80, marginRight: "auto", marginLeft: "auto", textAlign: "center"}}>
                         <Text fontSize={"20px"} color={"red"}>

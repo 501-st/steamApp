@@ -55,9 +55,9 @@ const AbsoluteContainer = styled.div`
 
 function Header() {
     const containers = useSelector(state => state.containers.containers)
-    console.log("Containers", containers)
     const dispatch = useDispatch()
     const notifications = useSelector(state => state.notifications.notifications)
+    const isPro = useSelector(state => state.containers.isPro)
 
     useEffect(() => {
         for (let i = 0; i < containers.length; i++) {
@@ -75,22 +75,13 @@ function Header() {
                 }))
             }
         }
-        console.log("Notifications", notifications)
-        /* for (let i = 0; i < containers.length; i++){
-             if (containers[i].data[containers[i].data.length - 1].percentBenefit >= containers[i].data[containers[i].data.length - 1].goal)
-                 dispatch(addNotificationAction({
-                     name: containers[i].data[containers[i].data.length - 1].name
-                 }))
-         }*/
         //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
         <HeaderWrapper>
             <Visible lg xl xxl>
-                {/*<Link to="/">*/}
                 <Image src={Logo}/>
-                {/* </Link>*/}
             </Visible>
             <AbsoluteContainer>
                 <RowContainer style={{columnGap: "20px"}}>
@@ -102,39 +93,32 @@ function Header() {
                             </Text>
                         </RowContainerMod>
                     </Link>
-                    {/*<Link to="/inventory">
-                        <RowContainerMod>
-                            <Image width={40} margin={"0 8px 0 0"} src={Inventory}/>
-                            <Text fontWeight={800}>
-                                Inventory
-                            </Text>
-                        </RowContainerMod>
-                    </Link>*/}
                 </RowContainer>
             </AbsoluteContainer>
             <RowContainer style={{columnGap: "20px"}}>
-                <Link header to="/notifications">
-                    <RowContainerMod>
-                        {notifications.length !== 0 &&
-                        <div style={{
-                            backgroundColor: "#EB5555",
-                            borderRadius: "50%",
-                            position: "absolute",
-                            padding: "1px 5px",
-                            zIndex: "10",
-                            bottom: 10,
-                            left: 35
-                        }}>
-                            <Text fontSize={"12px"}>
-                                {notifications.length}
+                {isPro
+                    && <Link header to="/notifications">
+                        <RowContainerMod>
+                            {notifications.length !== 0 &&
+                            <div style={{
+                                backgroundColor: "#EB5555",
+                                borderRadius: "50%",
+                                position: "absolute",
+                                padding: "1px 5px",
+                                zIndex: "10",
+                                bottom: 10,
+                                left: 35
+                            }}>
+                                <Text fontSize={"12px"}>
+                                    {notifications.length}
+                                </Text>
+                            </div>}
+                            <Image width={40} height={40} margin={"0 10px 0 0"} src={Notifications}/>
+                            <Text fontWeight={800}>
+                                Notifications
                             </Text>
-                        </div>}
-                        <Image width={40} height={40} margin={"0 10px 0 0"} src={Notifications}/>
-                        <Text fontWeight={800}>
-                            Notifications
-                        </Text>
-                    </RowContainerMod>
-                </Link>
+                        </RowContainerMod>
+                    </Link>}
                 <Link header to="/account">
                     <RowContainerMod>
                         <Image width={40} margin={"0 10px 0 0"} src={Profile}/>

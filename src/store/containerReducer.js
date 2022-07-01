@@ -1,5 +1,6 @@
 const defaultState = {
-    containers: []
+    containers: [],
+    isPro: false
 }
 
 const ADD_CONTAINER = "ADD_CONTAINER"
@@ -9,6 +10,9 @@ const ADD_ITEM = "ADD_ITEM"
 const ADD_BENEFIT = "ADD_BENEFIT"
 const DELETE_ITEM = "DELETE_ITEM"
 const CONTAINER_STATUS_CHECKED = "CONTAINER_STATUS_CHECKED"
+
+const UPGRADE_TO_PRO = "UPGRADE_TO_PRO"
+const DOWNGRADE = "DOWNGRADE"
 
 export let indexOfContainer = 0
 export let indexOfItem = 0
@@ -55,6 +59,10 @@ export const containerReducer = (state = defaultState, action) => {
                     } else return container
                 })
             }
+        case UPGRADE_TO_PRO:
+            return {...state, isPro: true}
+        case DOWNGRADE:
+            return {...state, isPro: false}
         default:
             return state
     }
@@ -103,5 +111,17 @@ export const deleteItem = (payload) => {
     return {
         type: DELETE_ITEM,
         payload
+    }
+}
+
+export const Upgrade = () => {
+    return {
+        type: UPGRADE_TO_PRO
+    }
+}
+
+export const Downgrade = () => {
+    return {
+        type: DOWNGRADE
     }
 }

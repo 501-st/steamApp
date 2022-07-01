@@ -6,6 +6,8 @@ import {RowContainer} from "../../../header/header";
 import Image from "../../../../theme/image";
 import Logo from "../images/logo.png"
 import Button from "../../../../theme/button";
+import {useDispatch} from "react-redux";
+import {Upgrade} from "../../../../store/containerReducer";
 
 const Container = styled.div`
   background: #343434;
@@ -29,8 +31,16 @@ const Ul = styled.ul`
 `;
 
 let UpgradeModal = ({setShow}) => {
+
+    const dispatch = useDispatch()
+
     const CancelPropagation = (event) => {
         event.stopPropagation()
+    }
+
+    const handleSubmit = () => {
+        dispatch(Upgrade())
+        setShow(false)
     }
 
     const DoNotReloadPage = (event) => {
@@ -88,7 +98,7 @@ let UpgradeModal = ({setShow}) => {
                         </Text>
                     </div>
                     <div style={{textAlign: "center"}}>
-                        <Button onClick={() => setShow(false)} background={"white"} border={"black"} padding={"12px 30px"}>
+                        <Button onClick={handleSubmit} background={"white"} border={"black"} padding={"12px 30px"}>
                             <Text fontSize={"16px"} color={"black"}>
                                 Proceed to payment
                             </Text>
