@@ -59,7 +59,8 @@ let AddContainerModal = ({setShow}) => {
                             Please, enter investment bag’s name:
                         </Text>
                     </div>
-                    {error !== "" && <div style={{position: "absolute", right: 0, left: 0, bottom: 120, marginRight: "auto", marginLeft: "auto", textAlign: "center"}}>
+                    {error !== "" &&
+                    <div style={{position: "absolute", right: 0, left: 0, bottom: 120, marginRight: "auto", marginLeft: "auto", textAlign: "center"}}>
                         <Text fontSize={"20px"} color={"red"}>
                             {error}
                         </Text>
